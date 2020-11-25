@@ -1,7 +1,7 @@
 import useBlurDecorator from './hooks/useBlurDecorator';
 import useChangeDecorator from './hooks/useChangeDecorator';
-import useCheckedToValue from './hooks/useCheckedToValue';
-import useDecorator from './hooks/useDecorator';
+import useCheckedToValue, {withChecked} from './hooks/useCheckedToValue';
+import useDecorator, {useOnBlur, useOnChange} from './hooks/useDecorator';
 import useUIDecorator from './hooks/useUIDecorator';
 import ScrollToError from './widget/ScrollToError';
 import EnterSubmit from './widget/EnterSubmit';
@@ -15,7 +15,13 @@ export const hooks = {
     useChangeDecorator,
     useCheckedToValue,
     useDecorator,
+    useOnBlur,
+    useOnChange,
     useUIDecorator
+};
+
+export const hoc = {
+    withChecked
 };
 
 export const widget = {
@@ -28,7 +34,7 @@ export const widget = {
 export const utils = {isElementInViewport};
 
 const api = {
-    hooks, widget, utils
+    hooks, hoc, widget, utils
 };
 
 export default api;

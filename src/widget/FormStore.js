@@ -16,9 +16,19 @@ const FormStore = ({cache}) => {
         } catch (e) {
         }
 
-        emitter.addListener('form-state-change', ({data}) => {
-            window.localStorage.setItem(name.current, JSON.stringify(data));
+        const subscriptionChange = emitter.addListener('form-state-change', ({data}) => {
+            const preData = window.localStorage.getItem(name.current), parseData = JSON.stringify(data);
+            preData !== parseData && window.localStorage.setItem(name.current, parseData);
         });
+
+        const subscriptionSubmit = emitter.addListener('form-submit-success', () => {
+            window.localStorage.removeItem(name.current);
+        });
+
+        return () => {
+            subscriptionChange && subscriptionChange.remove();
+            subscriptionSubmit && subscriptionSubmit.remove();
+        };
     }, [emitter]);
     return null;
 };
