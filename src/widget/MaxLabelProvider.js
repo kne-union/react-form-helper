@@ -1,27 +1,11 @@
-import React, {useState, useContext, createContext, useEffect} from 'react';
+import React, {useState, useContext, createContext, useEffect, useMemo, useRef} from 'react';
 import textWidth from "@kne/text-width";
-import {useEmitter} from "@kne/react-form";
+import {useFieldInfo} from "@kne/react-form";
+import uniq from 'lodash/uniq';
 
 const context = createContext({});
 
 const {Provider} = context;
-
-
-const useComputedMaxLabel = (setMaxWidth) => {
-    const emitter = useEmitter();
-
-    useEffect(() => {
-        const subscription = emitter.addListener('form-field-add', ({label, fieldRef}) => {
-            const fontSize = window
-                .getComputedStyle(fieldRef.current.querySelector('.react-form__field-label'))
-                .getPropertyValue('font-size');
-            setMaxWidth && setMaxWidth((oldWidth) => Math.max(textWidth(label, fontSize), oldWidth));
-        });
-        return () => {
-            subscription && subscription.remove();
-        };
-    }, [emitter, setMaxWidth]);
-};
 
 export const useMaxLabelWidth = () => {
     const {maxWidth} = useContext(context);
@@ -30,16 +14,19 @@ export const useMaxLabelWidth = () => {
 
 const MaxLabelProvider = ({minLabelWidth, children}) => {
     const [maxWidth, setMaxWidth] = useState(minLabelWidth || 0);
-    const [isMount, setIsMount] = useState(false);
+    const fields = useFieldInfo();
+    const root = useRef(null);
     useEffect(() => {
-        setIsMount(true);
-        return () => {
-            setIsMount(false);
-        };
-    }, [setIsMount]);
-    useComputedMaxLabel(setMaxWidth);
+        const label = (root.current.querySelector('.react-form__field-label')||root.current);
+        const fontSize = window
+            .getComputedStyle(label)
+            .getPropertyValue('font-size');
+        setMaxWidth(Math.max(...uniq(Object.values(fields).map(({label}) => label)).map((str)=>textWidth(str,fontSize))));
+    }, [fields]);
     return <Provider value={{maxWidth, setMaxWidth}}>
-        {isMount ? children : null}
+        <span ref={root}>
+            {children}
+        </span>
     </Provider>
 };
 

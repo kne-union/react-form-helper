@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect} from 'react';
 import classnames from 'classnames';
 import {useMaxLabelWidth} from '../widget/MaxLabelProvider';
 import {useEmitter} from "@kne/react-form";
+import {useFormSize} from '../widget/SizeProvider';
 
 const computedErrorClassName = ({errMsg, errState, isSubmit, isValueChanged}) => {
     return {
@@ -17,6 +18,7 @@ const useUIDecorator = (props) => {
         labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef,
         important, ignoreLabelWidth, formState, groupName, formData, ...others
     } = props;
+    const size = useFormSize();
     const [isREQ, setIsREQ] = useState(false),
         [isSubmit, setIsSubmit] = useState(false);
     const emitter = useEmitter();
@@ -52,8 +54,13 @@ const useUIDecorator = (props) => {
 
         const stateClassName = computedErrorClassName({errMsg, errState, isSubmit, isValueChanged});
         const isReq = important !== void (0) ? important : isREQ;
+        if (size) {
+            others.size = size;
+        }
         return (
-            <div ref={fieldRef} className={classnames('react-form__field', wrappedClassName, stateClassName)}>
+            <div ref={fieldRef} className={classnames('react-form__field', {
+                'is-ignore-label-width': ignoreLabelWidth
+            }, wrappedClassName, stateClassName)}>
                 <div className="react-form__field-main">
                     {label && !labelHidden ? (
                         <div

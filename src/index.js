@@ -6,6 +6,7 @@ import useUIDecorator from './hooks/useUIDecorator';
 import ScrollToError from './widget/ScrollToError';
 import EnterSubmit from './widget/EnterSubmit';
 import MaxLabelProvider from './widget/MaxLabelProvider';
+import SizeProvider from './widget/SizeProvider';
 import FormStore from './widget/FormStore';
 import isElementInViewport from './utils/isElementInViewport';
 
@@ -28,7 +29,8 @@ export const widget = {
     ScrollToError,
     EnterSubmit,
     MaxLabelProvider,
-    FormStore
+    FormStore,
+    SizeProvider
 };
 
 export const utils = {isElementInViewport};
