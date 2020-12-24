@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.0-alpha.10",
+  "version": "1.0.1",
   "description": "react-form的辅助工具包",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -43,10 +43,9 @@
     ]
   },
   "peerDependencies": {
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x",
-    "@kne/react-form": "^1.x"
+    "prop-types": "1>=5.x",
+    "react": ">=16.x",
+    "@kne/react-form": ">=1.x"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
