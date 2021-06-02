@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useEmitter } from '@kne/react-form';
+import { useFormContext } from '@kne/react-form';
 import isElementInViewport from '../utils/isElementInViewport';
 
 const ScrollToError = ({ scrollProps }) => {
-  const emitter = useEmitter();
+  const { emitter } = useFormContext();
   useEffect(() => {
     const subscription = emitter.addListener('form-submit-error', errors => {
       const el = errors[0].fieldRef.current;
