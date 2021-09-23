@@ -13,7 +13,7 @@ const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) 
 };
 
 const useUIDecorator = props => {
-  const { name, rule, className, onChange, label, labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef, important, ignoreLabelWidth, formState, groupIndex, groupName, formData, ...others } = props;
+  const { id, name, rule, className, onChange, label, labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef, important, ignoreLabelWidth, formState, groupIndex, groupName, formData, ...others } = props;
   const size = useFormSize();
   const [isREQ, setIsREQ] = useState(false),
     [isSubmit, setIsSubmit] = useState(false);

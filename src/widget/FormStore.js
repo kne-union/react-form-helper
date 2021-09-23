@@ -15,7 +15,7 @@ const FormStore = ({ cache }) => {
       }
     } catch (e) {}
 
-    const subscriptionChange = emitter.addListener('form-state-change', ({ data }) => {
+    const subscriptionChange = emitter.addListener('form-data-change', ({ data }) => {
       const preData = window.localStorage.getItem(name.current),
         parseData = JSON.stringify(data);
       preData !== parseData && window.localStorage.setItem(name.current, parseData);
