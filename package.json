@@ -43,7 +43,7 @@
     ]
   },
   "peerDependencies": {
-    "prop-types": "1>=5.x",
+    "prop-types": ">=15.x",
     "react": ">=16.x",
     "@kne/react-form": ">=1.x"
   },
