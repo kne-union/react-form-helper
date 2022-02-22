@@ -25,9 +25,14 @@ const FormStore = ({ cache }) => {
       window.localStorage.removeItem(name.current);
     });
 
+    const subscriptionRemove = emitter.addListener('form-store-remove', ()=>{
+        window.localStorage.removeItem(name.current);
+    });
+
     return () => {
       subscriptionChange && subscriptionChange.remove();
       subscriptionSubmit && subscriptionSubmit.remove();
+      subscriptionRemove && subscriptionRemove.remove();
     };
   }, [emitter]);
   return null;

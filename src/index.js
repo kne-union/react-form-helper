@@ -3,6 +3,7 @@ import useChangeDecorator from './hooks/useChangeDecorator';
 import useCheckedToValue, { withChecked } from './hooks/useCheckedToValue';
 import useDecorator, { useOnBlur, useOnChange } from './hooks/useDecorator';
 import useUIDecorator from './hooks/useUIDecorator';
+import useCacheRemove from './hooks/useCacheRemove';
 import ScrollToError from './widget/ScrollToError';
 import EnterSubmit from './widget/EnterSubmit';
 import MaxLabelProvider from './widget/MaxLabelProvider';
@@ -16,7 +17,8 @@ export const hooks = {
   useDecorator,
   useOnBlur,
   useOnChange,
-  useUIDecorator
+  useUIDecorator,
+  useCacheRemove
 };
 
 export const hoc = {
