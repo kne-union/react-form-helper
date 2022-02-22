@@ -19,7 +19,15 @@ const MaxLabelProvider = ({ minLabelWidth, children }) => {
   useEffect(() => {
     const label = root.current.querySelector('.react-form__field-label') || root.current;
     const fontSize = window.getComputedStyle(label).getPropertyValue('font-size');
-    setMaxWidth(Math.max(...uniq(Object.values(fields).map(({ label }) => label)).map(str => textWidth(str, fontSize))));
+    setMaxWidth(
+      Math.max(
+        ...uniq(
+          [].map.call(root.current.querySelectorAll('.react-form__field-label'), item => {
+            return item.innerText;
+          })
+        ).map(str => textWidth(str, fontSize))
+      )
+    );
   }, [fields]);
   return (
     <Provider value={{ maxWidth, setMaxWidth }}>
