@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { useMaxLabelWidth } from '../widget/MaxLabelProvider';
 import { useFormContext } from '@kne/react-form';
 import { useFormSize } from '../widget/SizeProvider';
+import { FieldPropsProvider } from './useFieldProps';
 
 const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) => {
   return {
@@ -13,7 +14,7 @@ const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) 
 };
 
 const useUIDecorator = props => {
-  const { id, name, rule, className, onChange, label, labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef, important, ignoreLabelWidth, formState, groupIndex, groupName, formData, ...others } = props;
+  const { id, name, rule, description, className, onChange, label, labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef, important, ignoreLabelWidth, formState, groupIndex, groupName, formData, ...others } = props;
   const size = useFormSize();
   const [isREQ, setIsREQ] = useState(false),
     [isSubmit, setIsSubmit] = useState(false);
@@ -31,7 +32,7 @@ const useUIDecorator = props => {
     return () => {
       subscription && subscription.remove();
     };
-  }, [emitter, name]);
+  }, [emitter]);
 
   const handlerChange = useCallback(
     (...args) => {
@@ -64,7 +65,8 @@ const useUIDecorator = props => {
             },
             wrappedClassName,
             stateClassName
-          )}>
+          )}
+        >
           <div className="react-form__field-main">
             {label && !labelHidden ? (
               <div className={classnames('react-form__field-label', { 'is-req': isReq })} style={style}>
@@ -73,8 +75,11 @@ const useUIDecorator = props => {
               </div>
             ) : null}
             <div className="react-form__field-input">
-              <WrappedComponent {...others} className={classnames('react-form__field-component', className)} onChange={handlerChange} />
-              {errMsg ? <div className="react-form__field-error">{errMsg}</div> : null}
+              <FieldPropsProvider props={props}>
+                <WrappedComponent {...others} className={classnames('react-form__field-component', className)} onChange={handlerChange} />
+                {description ? <div className="react-form__field-describable">{description}</div> : null}
+                {errMsg ? <div className="react-form__field-error">{errMsg}</div> : null}
+              </FieldPropsProvider>
             </div>
           </div>
         </div>

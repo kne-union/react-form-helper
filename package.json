@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.12",
+  "version": "1.0.20",
   "description": "react-form的辅助工具包",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -43,14 +43,15 @@
     ]
   },
   "peerDependencies": {
+    "@kne/react-form": ">=1.x",
     "prop-types": ">=15.x",
-    "react": ">=16.x",
-    "@kne/react-form": ">=1.x"
+    "react": ">=16.x"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@kne/text-width": "^0.1.0",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.7.6",
