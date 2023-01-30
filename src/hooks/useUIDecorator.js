@@ -21,7 +21,7 @@ const useUIDecorator = props => {
   const { emitter } = useFormContext();
   const labelWidth = useMaxLabelWidth();
   useEffect(() => {
-    setIsREQ((rule || '').split(' ').indexOf('REQ') > -1);
+    typeof rule === 'string' && setIsREQ((rule || '').split(' ').indexOf('REQ') > -1);
   }, [setIsREQ, name, rule]);
 
   //当表单提交时设置状态
