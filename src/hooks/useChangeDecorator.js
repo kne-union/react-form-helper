@@ -1,25 +1,25 @@
-import {useRef, useEffect, useCallback} from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
-const useChangeDecorator = ({triggerValidate, value, onChange, ...others}) => {
-    const hasChanged = useRef(false), validate = useRef(void (0));
-    const handlerChange = useCallback((...args) => {
-        onChange && onChange(...args);
-        hasChanged.current = true;
-    }, [onChange]);
+const useChangeDecorator = ({ triggerValidate, value, onChange, ...others }) => {
+  const hasChanged = useRef(false),
+    validate = useRef(triggerValidate);
+  const handlerChange = useCallback(
+    (...args) => {
+      onChange && onChange(...args);
+      hasChanged.current = true;
+    },
+    [onChange]
+  );
+  validate.current = triggerValidate;
+  useEffect(() => {
+    hasChanged.current && validate.current();
+  }, [value]);
 
-    useEffect(() => {
-        validate.current = triggerValidate;
-    }, [triggerValidate]);
-
-    useEffect(() => {
-        hasChanged.current && validate.current();
-    }, [value]);
-
-    return {
-        value,
-        onChange: handlerChange,
-        ...others
-    };
-}
+  return {
+    value,
+    onChange: handlerChange,
+    ...others
+  };
+};
 
 export default useChangeDecorator;

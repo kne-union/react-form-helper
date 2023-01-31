@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "react-form的辅助工具包",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -8,7 +8,7 @@
   "umd": "dist/react-form-helper.js",
   "umd:min": "dist/react-form-helper.min.js",
   "scripts": {
-    "build": "rollup -c",
+    "build:lib": "rollup -c",
     "start-demo": "cd example&&npm start",
     "start": "rollup -c -w",
     "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
