@@ -12,7 +12,7 @@ const useChangeDecorator = ({ triggerValidate, value, onChange, ...others }) => 
   );
   validate.current = triggerValidate;
   useEffect(() => {
-    hasChanged.current && validate.current && validate.current();
+    hasChanged.current && validate.current();
   }, [value]);
 
   return {
