@@ -14,7 +14,29 @@ const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) 
 };
 
 const useUIDecorator = props => {
-  const { id, name, rule, description, className, onChange, label, labelHidden, errMsg, errState, isValueChanged, wrappedClassName, fieldRef, important, ignoreLabelWidth, formState, groupIndex, groupName, formData, ...others } = props;
+  const {
+    id,
+    name,
+    rule,
+    description,
+    className,
+    onChange,
+    label,
+    labelRender,
+    labelHidden,
+    errMsg,
+    errState,
+    isValueChanged,
+    wrappedClassName,
+    fieldRef,
+    important,
+    ignoreLabelWidth,
+    formState,
+    groupIndex,
+    groupName,
+    formData,
+    ...others
+  } = props;
   const size = useFormSize();
   const [isREQ, setIsREQ] = useState(false),
     [isSubmit, setIsSubmit] = useState(false);
@@ -71,7 +93,7 @@ const useUIDecorator = props => {
             {label && !labelHidden ? (
               <div className={classnames('react-form__field-label', { 'is-req': isReq })} style={style}>
                 <i className="react-form__field_extra" />
-                {label}
+                {typeof labelRender === 'function' ? labelRender({ label }) : label}
               </div>
             ) : null}
             <div className="react-form__field-input">
