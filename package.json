@@ -1,10 +1,13 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "react-form的辅助工具包",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "init": "run-p npm install cd example && npm install",
     "start": "run-p start:lib start:example",
