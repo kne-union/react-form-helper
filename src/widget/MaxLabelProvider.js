@@ -1,7 +1,7 @@
 import React, { useState, useContext, createContext, useEffect, useRef } from 'react';
 import textWidth from '@kne/text-width';
 import { useFormContext } from '@kne/react-form';
-import uniq from 'lodash/uniq';
+import { uniq } from 'lodash';
 
 const context = createContext({});
 
