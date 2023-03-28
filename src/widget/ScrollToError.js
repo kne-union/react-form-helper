@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useFormContext } from '@kne/react-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 const ScrollToError = ({ scrollProps }) => {
   const { emitter } = useFormContext();
