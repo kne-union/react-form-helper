@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "react-form的辅助工具包",
   "main": "dist/index.js",
   "module": "dist/index.modern.mjs",
