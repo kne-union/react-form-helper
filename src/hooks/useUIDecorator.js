@@ -4,7 +4,6 @@ import { useMaxLabelWidth } from '../widget/MaxLabelProvider';
 import { useFormContext } from '@kne/react-form';
 import { useFormSize } from '../widget/SizeProvider';
 import { FieldPropsProvider } from './useFieldProps';
-import { globalParams } from '../preset';
 
 const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) => {
   return {
@@ -24,6 +23,7 @@ const useUIDecorator = props => {
     onChange,
     label,
     labelRender,
+    labelTips,
     labelHidden,
     errMsg,
     errState,
@@ -36,7 +36,6 @@ const useUIDecorator = props => {
     groupIndex,
     groupName,
     formData,
-    render,
     ...others
   } = props;
   const size = useFormSize();
@@ -66,7 +65,7 @@ const useUIDecorator = props => {
     [onChange, setIsSubmit]
   );
 
-  const renderFunc = useCallback(
+  return useCallback(
     WrappedComponent => {
       const style = {};
 
@@ -96,6 +95,7 @@ const useUIDecorator = props => {
               <div className={classnames('react-form__field-label', { 'is-req': isReq })} style={style}>
                 <i className="react-form__field_extra" />
                 {typeof labelRender === 'function' ? labelRender({ label }) : label}
+                {labelTips && <span className="react-form__field_label-tips">{typeof labelTips === 'function' ? labelTips(props) : labelTips}</span>}
               </div>
             ) : null}
             <div className="react-form__field-input">
@@ -111,8 +111,6 @@ const useUIDecorator = props => {
     },
     [labelWidth, fieldRef, labelHidden, ignoreLabelWidth, others, isValueChanged, className, errMsg, errState, handlerChange, important, isREQ, isSubmit, label, wrappedClassName]
   );
-  const renderProps = render || globalParams.render;
-  return typeof renderProps === 'function' ? renderProps(renderFunc) : renderFunc;
 };
 
 export default useUIDecorator;
