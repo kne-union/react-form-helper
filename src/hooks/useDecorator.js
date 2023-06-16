@@ -5,7 +5,7 @@ import useChangeDecorator from './useChangeDecorator';
 import { globalParams } from '../preset';
 
 const defaultPropsAssign = ({ fieldName, ...props }) => {
-  return Object.assign({}, globalParams.field[fieldName], props);
+  return Object.assign({}, globalParams.globalProps, globalParams.field[fieldName], props);
 };
 
 const useDecorator = ({ realtime, ...props }) => {
