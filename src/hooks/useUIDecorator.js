@@ -4,6 +4,7 @@ import { useMaxLabelWidth } from '../widget/MaxLabelProvider';
 import { useFormContext } from '@kne/react-form';
 import { useFormSize } from '../widget/SizeProvider';
 import { FieldPropsProvider } from './useFieldProps';
+import { globalParams } from '../preset';
 
 const computedErrorClassName = ({ errMsg, errState, isSubmit, isValueChanged }) => {
   return {
@@ -35,6 +36,7 @@ const useUIDecorator = props => {
     groupIndex,
     groupName,
     formData,
+    render,
     ...others
   } = props;
   const size = useFormSize();
@@ -64,7 +66,7 @@ const useUIDecorator = props => {
     [onChange, setIsSubmit]
   );
 
-  return useCallback(
+  const renderFunc = useCallback(
     WrappedComponent => {
       const style = {};
 
@@ -109,6 +111,8 @@ const useUIDecorator = props => {
     },
     [labelWidth, fieldRef, labelHidden, ignoreLabelWidth, others, isValueChanged, className, errMsg, errState, handlerChange, important, isREQ, isSubmit, label, wrappedClassName]
   );
+  const renderProps = render || globalParams.render;
+  return typeof renderProps === 'function' ? renderProps(renderFunc) : renderFunc;
 };
 
 export default useUIDecorator;
