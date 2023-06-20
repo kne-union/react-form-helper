@@ -94,7 +94,7 @@ const useUIDecorator = props => {
             {label && !labelHidden ? (
               <div className={classnames('react-form__field-label', { 'is-req': isReq })} style={style}>
                 <i className="react-form__field_extra" />
-                {typeof labelRender === 'function' ? labelRender({ label }) : label}
+                {typeof labelRender === 'function' ? labelRender({ label, ...others }) : label}
                 {labelTips && <span className="react-form__field_label-tips">{typeof labelTips === 'function' ? labelTips(props) : labelTips}</span>}
               </div>
             ) : null}
