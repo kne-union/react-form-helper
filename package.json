@@ -1,9 +1,10 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "1.0.35",
+  "version": "1.0.36",
+  "type": "module",
   "description": "react-form的辅助工具包",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.mjs",
+  "main": "dist/index.cjs",
+  "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
