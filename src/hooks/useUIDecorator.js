@@ -36,6 +36,7 @@ const useUIDecorator = props => {
     groupIndex,
     groupName,
     formData,
+    associationOptions,
     ...others
   } = props;
   const size = useFormSize();
@@ -100,7 +101,7 @@ const useUIDecorator = props => {
             ) : null}
             <div className="react-form__field-input">
               <FieldPropsProvider props={props}>
-                <WrappedComponent {...others} className={classnames('react-form__field-component', className)} onChange={handlerChange} />
+                <WrappedComponent {...Object.assign({}, others, associationOptions)} className={classnames('react-form__field-component', className)} onChange={handlerChange} />
                 {description ? <div className="react-form__field-describable">{description}</div> : null}
                 {errMsg ? <div className="react-form__field-error">{errMsg}</div> : null}
               </FieldPropsProvider>
@@ -109,7 +110,7 @@ const useUIDecorator = props => {
         </div>
       );
     },
-    [labelWidth, fieldRef, labelHidden, ignoreLabelWidth, others, isValueChanged, className, errMsg, errState, handlerChange, important, isREQ, isSubmit, label, wrappedClassName]
+    [labelWidth, fieldRef, labelHidden, ignoreLabelWidth, others, associationOptions, isValueChanged, className, errMsg, errState, handlerChange, important, isREQ, isSubmit, label, wrappedClassName]
   );
 };
 
