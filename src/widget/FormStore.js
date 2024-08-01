@@ -1,35 +1,41 @@
 import { useEffect, useRef } from 'react';
 import { useFormContext } from '@kne/react-form';
+import localStorage from '@kne/local-storage';
+
 
 const FormStore = ({ cache }) => {
   const name = useRef(`REACT_FORM_STORE_${cache}`);
-  const { emitter } = useFormContext();
+  const fieldsRef = useRef(new Map());
+  const { emitter, openApi } = useFormContext();
   useEffect(() => {
-    try {
-      const data = window.localStorage.getItem(name.current);
-      if (data) {
-        const parseData = JSON.parse(data);
-        setTimeout(() => {
-          emitter.emit('form-data-set', { data: parseData });
-        }, 0);
+    const data = localStorage.getItem(name.current) || {};
+
+    const subscriptionFieldReady = emitter.addListener('form:field:ready', (field) => {
+      if (data[field.path]) {
+        emitter.emit(`form-field:input:${field.id}`, { value: data[field.path].value });
       }
-    } catch (e) {}
-
-    const subscriptionChange = emitter.addListener('form-data-change', ({ data }) => {
-      const preData = window.localStorage.getItem(name.current),
-        parseData = JSON.stringify(data);
-      preData !== parseData && window.localStorage.setItem(name.current, parseData);
     });
 
-    const subscriptionSubmit = emitter.addListener('form-submit-success', () => {
-      window.localStorage.removeItem(name.current);
+    const subscriptionChange = emitter.addListener('form:field:set-value', ({ id, value, path }) => {
+      if (value === void 0) {
+        return;
+      }
+      fieldsRef.current.set(id, { id, value, path });
+      const preData = Object.assign({}, localStorage.getItem(name.current));
+      preData[path] = { id, value, path };
+      localStorage.setItem(name.current, preData);
     });
 
-    const subscriptionRemove = emitter.addListener('form-store-remove', ()=>{
-        window.localStorage.removeItem(name.current);
+    const subscriptionSubmit = emitter.addListener('form:submit:success', () => {
+      localStorage.removeItem(name.current);
+    });
+
+    const subscriptionRemove = emitter.addListener('form-widget:store:remove', () => {
+      localStorage.removeItem(name.current);
     });
 
     return () => {
+      subscriptionFieldReady && subscriptionFieldReady.remove();
       subscriptionChange && subscriptionChange.remove();
       subscriptionSubmit && subscriptionSubmit.remove();
       subscriptionRemove && subscriptionRemove.remove();
