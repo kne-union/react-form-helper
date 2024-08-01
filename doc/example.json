@@ -1,0 +1,28 @@
+{
+  "isFull": true,
+  "list": [
+    {
+      "title": "基本示例",
+      "description": "简单的form到input组件的绑定",
+      "code": "./base.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    }
+  ]
+}

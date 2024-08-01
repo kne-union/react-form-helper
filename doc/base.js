@@ -1,33 +1,3 @@
-
-# react-form-helper
-
-
-### 描述
-
-react-form的辅助工具包
-
-
-### 安装
-
-```shell
-npm i --save @kne/react-form-helper
-```
-
-
-### 概述
-
-桥接UI组件库的Form输入组件和@kne/react-form
-
-
-### 示例(全屏)
-
-#### 示例代码
-
-- 基本示例
-- 简单的form到input组件的绑定
-- _ReactFormHelper(@kne/current-lib),antd(antd),_ReactForm(@kne/react-form),remoteLoader(@kne/remote-loader)
-
-```jsx
 const { createWithRemoteLoader } = remoteLoader;
 const { hooks, widget, utils } = _ReactFormHelper;
 const { default: Form, useSubmit } = _ReactForm;
@@ -122,10 +92,3 @@ const BaseExample = createWithRemoteLoader({
 });
 
 render(<BaseExample />);
-
-```
-
-
-### API
-
-
