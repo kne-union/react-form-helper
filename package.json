@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-helper",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "react-form的辅助工具包",
   "syntax": {
     "esmodules": true
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kne-union/react-form.git"
+    "url": "git+https://github.com/kne-union/react-form-helper.git"
   },
   "files": [
     "dist"

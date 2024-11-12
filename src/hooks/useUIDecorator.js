@@ -50,7 +50,7 @@ const useUIDecorator = props => {
 
   //当表单提交时设置状态
   useEffect(() => {
-    const subscription = emitter.addListener('form-submit', () => {
+    const subscription = emitter.addListener('form:submit', () => {
       setIsSubmit(true);
     });
     return () => {
