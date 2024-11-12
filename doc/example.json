@@ -8,7 +8,7 @@
       "scope": [
         {
           "name": "_ReactFormHelper",
-          "packageName": "@kne/current-lib"
+          "packageName": "@kne/current-lib_react-form-helper"
         },
         {
           "name": "antd",

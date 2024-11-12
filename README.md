@@ -25,7 +25,7 @@ npm i --save @kne/react-form-helper
 
 - 基本示例
 - 简单的form到input组件的绑定
-- _ReactFormHelper(@kne/current-lib),antd(antd),_ReactForm(@kne/react-form),remoteLoader(@kne/remote-loader)
+- _ReactFormHelper(@kne/current-lib_react-form-helper),antd(antd),_ReactForm(@kne/react-form),remoteLoader(@kne/remote-loader)
 
 ```jsx
 const { createWithRemoteLoader } = remoteLoader;
