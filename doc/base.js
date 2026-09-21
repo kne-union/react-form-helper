@@ -1,23 +1,18 @@
 const { createWithRemoteLoader } = remoteLoader;
-const { hooks, widget, utils } = _ReactFormHelper;
+const { hooks } = _ReactFormHelper;
 const { default: Form, useSubmit } = _ReactForm;
 const { Input: InputField, Button, Flex } = antd;
 
 const { useDecorator } = hooks;
-const { EnterSubmit, FormStore, ScrollToError } = widget;
 
-const Input = (props) => {
+const Input = props => {
   const render = useDecorator(Object.assign({ placeholder: `请输入${props.label}` }, props));
   return render(InputField);
 };
 
-const SubmitButton = ({ type = 'primary', realTime, realtime, disabled = false, ...props }) => {
+const SubmitButton = ({ type = 'primary', realtime, disabled = false, ...props }) => {
   const { isPass, isLoading, ...submitProps } = useSubmit(props);
-  if (typeof realTime === 'boolean') {
-    console.error(`warning: realTime参数已废弃，请使用realtime，后续版本可能回删除realTime的支持`);
-  }
-  return (<Button type={type} loading={isLoading}
-                  disabled={disabled || (realtime ? !isPass : false)} {...props} {...submitProps} />);
+  return <Button type={type} loading={isLoading} disabled={disabled || (realtime ? !isPass : false)} {...props} {...submitProps} />;
 };
 
 const BaseExample = createWithRemoteLoader({
@@ -25,70 +20,25 @@ const BaseExample = createWithRemoteLoader({
 })(({ remoteModules }) => {
   const [InfoPage, useConfirmModal] = remoteModules;
   const modal = useConfirmModal();
-  const formInner = <Flex vertical gap="middle">
-    <Input name="name" label="名称" rule="REQ LEN-0-10" />
-    <Input name="email" label="邮箱" rule="REQ EMAIL" />
-    <SubmitButton>提交</SubmitButton>
-  </Flex>;
-  return <InfoPage>
-    <InfoPage.Part title="简单表单">
-      <Form onSubmit={(data) => {
-        modal({
-          type: 'info', message: JSON.stringify(data, null, 2)
-        });
-      }}>
-        {formInner}
-      </Form>
-    </InfoPage.Part>
-    <InfoPage.Part title="自动滚动到错误位置">
-      <Form onSubmit={(data) => {
-        modal({
-          type: 'info', message: JSON.stringify(data, null, 2)
-        });
-      }} onError={(errors) => {
-        modal({
-          type: 'error',
-          message: JSON.stringify(errors.map((item) => ({ label: item.label, errMsg: item.errMsg })), null, 2)
-        });
-      }}>
-        <ScrollToError />
-        {formInner}
-      </Form>
-    </InfoPage.Part>
-    <InfoPage.Part title="回车提交表单">
-      <Form onSubmit={(data) => {
-        modal({
-          type: 'info', message: JSON.stringify(data, null, 2)
-        });
-      }} onError={(errors) => {
-        modal({
-          type: 'error',
-          message: JSON.stringify(errors.map((item) => ({ label: item.label, errMsg: item.errMsg })), null, 2)
-        });
-      }}>
-        <EnterSubmit>
-          {formInner}
-        </EnterSubmit>
-      </Form>
-    </InfoPage.Part>
-    <InfoPage.Part title="表单缓存">
-      <Form onSubmit={(data) => {
-        modal({
-          type: 'info', message: JSON.stringify(data, null, 2)
-        });
-      }} onError={(errors) => {
-        modal({
-          type: 'error',
-          message: JSON.stringify(errors.map((item) => ({ label: item.label, errMsg: item.errMsg })), null, 2)
-        });
-      }}>
-        <FormStore cache="test-form-cache" />
-        <EnterSubmit>
-          {formInner}
-        </EnterSubmit>
-      </Form>
-    </InfoPage.Part>
-  </InfoPage>;
+
+  return (
+    <InfoPage>
+      <InfoPage.Part title="useDecorator 绑定 antd Input">
+        <Form
+          onSubmit={data => {
+            modal({ type: 'info', message: JSON.stringify(data, null, 2) });
+          }}
+        >
+          <Flex vertical gap="middle" style={{ maxWidth: 420 }}>
+            <Input name="name" label="姓名" rule="REQ LEN-0-20" />
+            <Input name="email" label="邮箱" rule="REQ EMAIL" />
+            <Input name="mobile" label="手机号" rule="REQ LEN-11-11" description="失焦后触发校验（默认行为）" />
+            <SubmitButton>提交</SubmitButton>
+          </Flex>
+        </Form>
+      </InfoPage.Part>
+    </InfoPage>
+  );
 });
 
 render(<BaseExample />);

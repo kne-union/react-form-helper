@@ -1,14 +1,147 @@
 {
-  "isFull": true,
+  "isFull": false,
   "list": [
     {
       "title": "基本示例",
-      "description": "简单的form到input组件的绑定",
+      "description": "用 useDecorator 把 antd Input 接到 @kne/react-form",
       "code": "./base.js",
       "scope": [
         {
           "name": "_ReactFormHelper",
           "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    },
+    {
+      "title": "校验时机",
+      "description": "对照 useOnBlur / useOnChange / useDecorator(realtime) 的触发时机",
+      "code": "./decorators.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    },
+    {
+      "title": "Checkbox / Switch",
+      "description": "withChecked 把 value 映射为 checked，适配 antd 布尔控件",
+      "code": "./checked.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    },
+    {
+      "title": "字段 UI",
+      "description": "labelTips、description、MaxLabelProvider、SizeProvider、useFieldProps",
+      "code": "./field-ui.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    },
+    {
+      "title": "表单 Widget",
+      "description": "ScrollToError、EnterSubmit、FormStore、useCacheRemove",
+      "code": "./widgets.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        },
+        {
+          "name": "_ReactForm",
+          "packageName": "@kne/react-form"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    },
+    {
+      "title": "多行错误间距",
+      "description": "对照未报错 / 单行报错 / 多行报错：多行错误不得盖住下一 Field，单行与未报错净间距应接近",
+      "code": "./field-error-overlap.js",
+      "scope": [
+        {
+          "name": "_ReactFormHelper",
+          "packageName": "@kne/current-lib_react-form-helper"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-helper/dist/index.css"
         },
         {
           "name": "antd",

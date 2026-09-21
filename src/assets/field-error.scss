@@ -1,0 +1,40 @@
+/*
+ * components-core 远程包会给 .react-form__field-error 设 position:absolute，
+ * 必须用 !important 拉回文档流，否则多行错误不占高度、盖住下一 Field。
+ *
+ * 字段默认 margin 24px；有错误时扣掉「margin-top + 一行」，
+ * 未报错与单行报错净间距一致，多行只多出换行部分。
+ */
+.react-form__field {
+  margin-bottom: 24px !important;
+}
+
+.react-form__field:has(.react-form__field-error) {
+  margin-bottom: calc(24px - 4px - 1.5 * 12px) !important;
+}
+
+.react-form__field-input {
+  position: relative;
+}
+
+.react-form__field-input:has(.react-form__field-error) {
+  align-self: flex-start !important;
+}
+
+.react-form__field-error {
+  color: #fc3333 !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 4px !important;
+  margin-bottom: 0 !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

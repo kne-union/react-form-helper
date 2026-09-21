@@ -11,6 +11,7 @@ import MaxLabelProvider from './widget/MaxLabelProvider';
 import SizeProvider from './widget/SizeProvider';
 import FormStore from './widget/FormStore';
 import { useField } from '@kne/react-form';
+import './assets/field-error.scss';
 
 export const hooks = {
   useField,
