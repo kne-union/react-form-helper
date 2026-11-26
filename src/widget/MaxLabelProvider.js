@@ -22,7 +22,7 @@ const MaxLabelProvider = ({ minLabelWidth, children }) => {
     }
     // label 在上、控件在下（react-form--inner）不需要对齐 label 列宽；
     // 按全文测 minWidth 会把 Field 撑出容器（长问卷题等场景）
-    const form = root.current.closest('form');
+    const form = root.current.closest('.react-form');
     if (form?.classList.contains('react-form--inner')) {
       setMaxWidth(0);
       return;
